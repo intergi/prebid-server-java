@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: "us-east-1"
   AWS_ROLE: arn:aws:iam::885182695675:role/PrebidDeploymentDevRole
-  REPO_NAME: prebid-server
+  REPO_NAME: prebid-server-java
 
 jobs:
   deploy:

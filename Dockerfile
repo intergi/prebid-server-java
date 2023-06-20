@@ -8,6 +8,7 @@ VOLUME /app/prebid-server/data
 COPY src/main/docker/run.sh ./
 COPY src/main/docker/application.yaml ./
 COPY target/prebid-server.jar ./
+COPY sample/ ./sample/
 
 EXPOSE 8080
 EXPOSE 8060

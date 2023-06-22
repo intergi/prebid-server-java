@@ -252,7 +252,7 @@ public class HttpApplicationSettings implements ApplicationSettings {
             if (!requestIds.isEmpty()) {
                 url.append("&");
             }
-            url.append("imp-ids=[\"").append(joinIds(impIds)).append("\"]");
+            url.append("imp-ids=[%22").append(joinIds(impIds)).append("%22]");
         }
 
         return url.toString();

@@ -236,7 +236,7 @@ public class HttpApplicationSettingsTest extends VertxTest {
                 new HashSet<>(asList("id3", "id4")), timeout);
 
         // then
-        verify(httpClient).get(eq("http://stored-requests?request-ids=[\"id2\",\"id1\"]&imp-ids=[\"id4\",\"id3\"]"),
+        verify(httpClient).get(eq("http://stored-requests?request-ids=[%22id2%22,%22id1%22]&imp-ids=[%22id4%22,%22id3%22]"),
                 any(), anyLong());
     }
 
@@ -251,7 +251,7 @@ public class HttpApplicationSettingsTest extends VertxTest {
         httpApplicationSettings.getStoredData(null, singleton("id1"), singleton("id2"), timeout);
 
         // then
-        verify(httpClient).get(eq("http://some-domain?param1=value1&request-ids=[\"id1\"]&imp-ids=[\"id2\"]"), any(),
+        verify(httpClient).get(eq("http://some-domain?param1=value1&request-ids=[%22id1%22]&imp-ids=[%22id2%22]"), any(),
                 anyLong());
     }
 

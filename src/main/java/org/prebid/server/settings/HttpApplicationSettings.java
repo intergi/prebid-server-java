@@ -245,7 +245,7 @@ public class HttpApplicationSettings implements ApplicationSettings {
         url.append(endpoint.contains("?") ? "&" : "?");
 
         if (!requestIds.isEmpty()) {
-            url.append("request-ids=[%22").append(joinIds(requestIds)).replace('"', '%22').append("%22]");
+            url.append("request-ids=[%22").append(joinIds(requestIds)).append("%22]");
         }
 
         if (!impIds.isEmpty()) {

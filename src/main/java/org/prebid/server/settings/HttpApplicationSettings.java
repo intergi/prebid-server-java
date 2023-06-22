@@ -245,14 +245,14 @@ public class HttpApplicationSettings implements ApplicationSettings {
         url.append(endpoint.contains("?") ? "&" : "?");
 
         if (!requestIds.isEmpty()) {
-            url.append("request-ids=[\"").append(joinIds(requestIds)).append("\"]");
+            url.append("request-ids=[%22").append(joinIds(requestIds)).append("%22]");
         }
 
         if (!impIds.isEmpty()) {
             if (!requestIds.isEmpty()) {
                 url.append("&");
             }
-            url.append("imp-ids=[\"").append(joinIds(impIds)).append("\"]");
+            url.append("imp-ids=[%22").append(joinIds(impIds)).append("%22]");
         }
 
         return url.toString();

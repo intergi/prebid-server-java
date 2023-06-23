@@ -2,6 +2,7 @@ package org.prebid.server.it;
 
 import io.restassured.response.Response;
 import org.json.JSONException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.prebid.server.model.Endpoint;
@@ -17,6 +18,8 @@ import static java.util.Collections.singletonList;
 
 @RunWith(SpringRunner.class)
 public class InfytvTest extends IntegrationTest {
+    @Ignore
+    @Test
     public void openrtb2AuctionShouldRespondWithBidsFromInfytv() throws IOException, JSONException {
         // given
         WIRE_MOCK_RULE.stubFor(post(urlPathEqualTo("/infytv-exchange"))

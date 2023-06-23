@@ -18,6 +18,7 @@ import static java.util.Collections.singletonList;
 
 @RunWith(SpringRunner.class)
 public class InfytvTest extends IntegrationTest {
+        
     @Ignore
     @Test
     public void openrtb2AuctionShouldRespondWithBidsFromInfytv() throws IOException, JSONException {

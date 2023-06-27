@@ -1,7 +1,3 @@
-gdpr:
-  vendorlist:
-    v2:
-      cache-dir: /app/prebid-server/data/vendorlist-v2
 status-response: "ok"
 adapters:
   appnexus:

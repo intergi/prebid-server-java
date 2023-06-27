@@ -27,7 +27,7 @@ settings:
   enforce-valid-account: false
   generate-storedrequest-bidrequest-id: true
   filesystem:
-    settings-filename: sample/sample-app-settings.yaml
+    settings-filename: app-settings.yaml
     stored-requests-dir: stored_requests/data/by_id/stored_requests
     stored-imps-dir: stored_requests/data/by_id/stored_imps
     stored-responses-dir: stored_responses

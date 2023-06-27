@@ -7,6 +7,7 @@ VOLUME /app/prebid-server/data
 
 COPY src/main/docker/run.sh ./
 COPY src/main/docker/application.yaml ./
+COPY src/main/docker/app-settings.yaml ./ 
 COPY target/prebid-server.jar ./
 COPY stored_requests/ ./stored_requests/
 COPY stored_responses/ ./stored_responses/

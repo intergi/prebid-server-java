@@ -27,10 +27,10 @@ settings:
   enforce-valid-account: false
   generate-storedrequest-bidrequest-id: true
   filesystem:
-    settings-filename: /app/prebid-server/app-settings.yaml
-    stored-requests-dir: /app/prebid-server/stored_requests/data/by_id/stored_requests
-    stored-imps-dir: /app/prebid-server/stored_requests/data/by_id/stored_imps
-    stored-responses-dir: /app/prebid-server/stored_responses
+    settings-filename: conf/app-settings.yaml
+    stored-requests-dir: stored_requests/data/by_id/stored_requests
+    stored-imps-dir: stored_requests/data/by_id/stored_imps
+    stored-responses-dir: stored_responses
     categories-dir:
   http:
     endpoint: https://config.playwire.com/prebid/

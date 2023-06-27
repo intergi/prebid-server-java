@@ -1,2 +1,4 @@
 target/*.jar
 src/main/docker/*
+stored_requests/*
+stored_responses/*

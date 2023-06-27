@@ -1,7 +1,9 @@
 name: DEV Deployment to ECS
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - ci-cd-configuration
      
 env:
   AWS_REGION: "us-east-1"

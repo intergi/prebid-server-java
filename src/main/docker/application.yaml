@@ -34,7 +34,7 @@ settings:
     categories-dir:
   http:
     endpoint: https://config.playwire.com/prebid/
-    amp-endpoint: 
+    amp-endpoint: https://config.playwire.com/prebid/
     video-endpoint: 
     category-endpoint: 
 gdpr:

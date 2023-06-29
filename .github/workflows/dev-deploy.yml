@@ -1,9 +1,7 @@
 name: DEV Deployment to ECS
 
 on:
-  push:
-    branches:
-      - config-deplyment-test
+  workflow_dispatch: 
 
 env:
   AWS_REGION: "us-east-1"

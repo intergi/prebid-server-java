@@ -38,7 +38,7 @@ settings:
     video-endpoint: https://config.playwire.com/prebid/
     category-endpoint: https://config.playwire.com/prebid/
 gdpr:
-  default-value: 1
+  default-value: 0
   vendorlist:
     v2:
       cache-dir: /var/tmp/vendor2

@@ -27,15 +27,16 @@ settings:
   enforce-valid-account: false
   generate-storedrequest-bidrequest-id: true
   filesystem:
+    settings-filename: conf/app-settings.yaml
     stored-requests-dir: stored_requests/data/by_id/stored_requests/
     stored-imps-dir: stored_requests/data/by_id/stored_imps/
     stored-responses-dir: stored_responses
     categories-dir:
   http:
     endpoint: https://config.playwire.com/prebid/
-    amp-endpoint: https://config.playwire.com/prebid/
-    video-endpoint: https://config.playwire.com/prebid/
-    category-endpoint: https://config.playwire.com/prebid/
+    amp-endpoint: 
+    video-endpoint: 
+    category-endpoint: 
 gdpr:
   default-value: 0
   vendorlist:

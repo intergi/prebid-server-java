@@ -66,6 +66,10 @@ jobs:
       id-token: write
       contents: read
     steps:  
+    - env:
+        IMAGE_NAME: ${{ needs.build.outputs.container_name }}
+      run: echo "$IMAGE_NAME"
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
@@ -75,17 +79,16 @@ jobs:
     - name: Download task definition
       run: |
         aws ecs describe-task-definition --task-definition prebid-server --query taskDefinition > task-definition.json
-    
-    - name: Debug
-      run: echo ${{ needs.build.outputs.container_name }}
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
+      env:
+        IMAGE_NAME: ${{ needs.build.outputs.container_name }}
       with:
         task-definition: task-definition.json
         container-name: prebid-server
-        image: ${{ needs.build.outputs.container_name }}
+        image: $IMAGE_NAME
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -115,10 +118,12 @@ jobs:
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
+      env:
+        IMAGE_NAME: ${{ needs.build.outputs.container_name }}
       with:
         task-definition: task-definition.json
         container-name: prebid-server
-        image: ${{ needs.build.outputs.container_name }}
+        image: $IMAGE_NAME
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1

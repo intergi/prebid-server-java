@@ -1,7 +1,9 @@
 name: DEV Deployment to ECS
 
+# on:
+#   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
      
 env:
   AWS_REGION: "us-east-1"
@@ -9,8 +11,10 @@ env:
   REPO_NAME: prebid-server-java
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    outputs: 
+      container_name: ${{ steps.build-image.outputs.image }}
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -51,6 +55,23 @@ jobs:
         echo "Pushing image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+  deploy-us:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write
+      contents: read
+    steps:  
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ env.AWS_ROLE }}
+        aws-region: "us-east-1"
+
     - name: Download task definition
       run: |
         aws ecs describe-task-definition --task-definition prebid-server --query taskDefinition > task-definition.json
@@ -61,7 +82,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: prebid-server
-        image: ${{ steps.build-image.outputs.image }}
+        image: ${{ needs.build.outputs.container_name }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -69,4 +90,41 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: prebid-dev-service
         cluster:  prebid-server-dev-cluster
-        wait-for-service-stability: true
+        wait-for-service-stability: false
+
+  deploy-eu:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write
+      contents: read
+    steps:  
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ env.AWS_ROLE }}
+        aws-region: "eu-central-1"
+
+    - name: Download task definition
+      run: |
+        aws ecs describe-task-definition --task-definition prebid-server --query taskDefinition > task-definition.json
+
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: task-definition.json
+        container-name: prebid-server
+        image: ${{ needs.build.outputs.container_name }}
+
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: prebid-dev-service-eu
+        cluster:  prebid-server-dev-cluster-eu
+        wait-for-service-stability: false
+    

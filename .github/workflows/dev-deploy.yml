@@ -68,7 +68,7 @@ jobs:
     steps:  
     - env:
         IMAGE_NAME: ${{ needs.build.outputs.container_name }}
-      run: echo "$IMAGE_NAME"
+      run: echo ${{ env.IMAGE_NAME }}
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
@@ -88,7 +88,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: prebid-server
-        image: $IMAGE_NAME
+        image: ${{ env.IMAGE_NAME }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -123,7 +123,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: prebid-server
-        image: $IMAGE_NAME
+        image: ${{ env.IMAGE_NAME }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1

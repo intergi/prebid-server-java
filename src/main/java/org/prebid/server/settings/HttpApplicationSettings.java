@@ -116,7 +116,7 @@ public class HttpApplicationSettings implements ApplicationSettings {
         url.append(endpoint.contains("?") ? "&" : "?");
 
         if (!accountIds.isEmpty()) {
-            url.append("account-ids=[\"").append(joinIds(accountIds)).append("\"]");
+            url.append("account-ids=[%22").append(joinIds(accountIds)).append("%22]");
         }
 
         return url.toString();
@@ -245,21 +245,21 @@ public class HttpApplicationSettings implements ApplicationSettings {
         url.append(endpoint.contains("?") ? "&" : "?");
 
         if (!requestIds.isEmpty()) {
-            url.append("request-ids=[\"").append(joinIds(requestIds)).append("\"]");
+            url.append("request-ids=[%22").append(joinIds(requestIds)).append("%22]");
         }
 
         if (!impIds.isEmpty()) {
             if (!requestIds.isEmpty()) {
                 url.append("&");
             }
-            url.append("imp-ids=[\"").append(joinIds(impIds)).append("\"]");
+            url.append("imp-ids=[%22").append(joinIds(impIds)).append("%22]");
         }
 
         return url.toString();
     }
 
     private static String joinIds(Set<String> ids) {
-        return String.join("\",\"", ids);
+        return String.join("%22,%22", ids);
     }
 
     private static Future<StoredDataResult> failStoredDataResponse(Throwable throwable, Set<String> requestIds,

@@ -1,4 +1,52 @@
+status-response: "ok"
+adapters:
+  appnexus:
+    enabled: true
+  ix:
+    enabled: true
+  openx:
+    enabled: true
+  pubmatic:
+    enabled: true
+  rubicon:
+    enabled: true
+    xapi:
+      username: pb_playwire
+      password: KNXDFG67MN
+    usersync:
+      url: https://secure-assets.rubiconproject.com/utils/xapi/multi-sync.html?p=pbs-Playwire&gdpr={{.GDPR}}&gdpr_consent={{.GDPRConsent}}&us_privacy={{.USPrivacy}}
+
+metrics:
+  prefix: prebid
+cache:
+  scheme: https
+  host: prebid.adnxs.com
+  path: /pbc/v1/cache
+  query: uuid=
+settings:
+  enforce-valid-account: false
+  generate-storedrequest-bidrequest-id: true
+  filesystem:
+    settings-filename: conf/app-settings.yaml
+    stored-requests-dir: stored_requests/data/by_id/stored_requests/
+    stored-imps-dir: stored_requests/data/by_id/stored_imps/
+    stored-responses-dir: stored_responses
+    categories-dir:
+  http:
+    endpoint: https://config.playwire.com/prebid/
+    amp-endpoint: https://config.playwire.com/prebid/
+    video-endpoint: https://config.playwire.com/prebid/
+    category-endpoint: https://config.playwire.com/prebid/
 gdpr:
+  default-value: 0
   vendorlist:
     v2:
-      cache-dir: /app/prebid-server/data/vendorlist-v2
+      cache-dir: /var/tmp/vendor2
+admin-endpoints:
+  version:
+    enabled: true
+  logging-changelevel:
+    enabled: true
+    path: /logging/changelevel
+    on-application-port: true
+    protected: false

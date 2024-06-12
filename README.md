@@ -123,3 +123,6 @@ There are a couple of 'hello world' test requests described in sample/requests/R
 - [Code Style](docs/developers/code-style.md)
 - [Code Review](docs/developers/code-reviews.md)
 - [Versioning](docs/developers/versioning.md)
+
+## Playwire AWS Configuration 
+Configuration file `src/main/docker/application.yaml`.
